@@ -35,18 +35,26 @@ Game.prototype.start = function () {
 
   self.canvasElement.setAttribute('width', self.width);
   self.canvasElement.setAttribute('height', self.height);
-
-  self.player = new Player(self.canvasElement,5);
  
+ self.playerRight=new Player(self.canvasElement,'right')
+ self.playerLeft=new Player(self.canvasElement,'left')
+
+ self.ball = new Ball(self.canvasElement)
+
   self.startLoop();
 
-  self.handleKeyDown = function (event) {
+  self.handleKeyDown= function (event) {
     if (event.key === 'ArrowUp') {
-      self.player.setDirection(-1);
+      self.playerRight.setDirection(-1);
     } else if (event.key === 'ArrowDown') {
-      self.player.setDirection(1);
+      self.playerRight.setDirection(+1);
     }
-    
+    else if (event.key === 'w') {
+      self.playerLeft.setDirection(-1);
+    }
+    else if (event.key === 's') {
+      self.playerLeft.setDirection(1);
+    }
   };
 
   document.body.addEventListener('keydown', self.handleKeyDown);
@@ -58,27 +66,18 @@ Game.prototype.startLoop = function() {
  
   function loop() {
     var ctx = self.canvasElement.getContext('2d');
-    
-    if (Math.random() > 0.99){
-    var y = self.canvasElement.height * Math.random();
-    }
-   // create more enemies now and then
-   //update player posdition
-   
-    self.player.update();
-   
+    self.playerRight.update();
+    self.playerLeft.update();
+    self.ball.update();
     ctx.clearRect(0, 0, self.width, self.height);
-
-    self.player.draw();
-   
+    self.playerRight.draw();
+    self.playerLeft.draw();
+    self.ball.update();
     if (!self.gameIsOver){
-      window.requestAnimationFrame(loop);
-      
-    } //draw all enemies 
-   window.requestAnimationFrame(loop);
-
- }
- window.requestAnimationFrame(loop);
+    window.requestAnimationFrame(loop);   
+    };
+  };
+window.requestAnimationFrame(loop);  
 };
 
 Game.prototype.onOver = function (callback) {
@@ -92,19 +91,19 @@ Game.prototype.gameOver = function (callback) {
   self.gameIsOver = true
   self.ongameOverCallback()
 };
-Game.prototype.checkIfEnemiesCollidedPlayer = function(){
-  var self =this;
+//Game.prototype.checkIfEnemiesCollidedPlayer = function(){
+  //var self =this;
 
-  self.enemies.forEach(function (item){
-    if(self.player.collidesWithEnemy(item)){
-      self.player.collided();
+  //self.enemies.forEach(function (item){
+    //if(self.player.collidesWithEnemy(item)){
+      //self.player.collided();
 
-      if (!self.player.lives) {
-        self.gameOver();
-      }
-    }
-})
-};
+      //if (!self.player.lives) {
+        //self.gameOver();
+      //}
+    //}
+//})
+//};
 
 Game.prototype.destroy = function () {
   var self = this;

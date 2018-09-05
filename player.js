@@ -1,20 +1,24 @@
 
 "use strict";
-function Player(canvas, score,side){
-    var self =this; 
+function Player(canvas, side){
+    var self = this; 
     self.canvas = canvas;
-    self.score = score;
-    self.size = 100;
-    //self.side = if ('side left'){
-                //return x=10 +self.size/2;
-                //else
-                //return x= 250
-    //};
-    self.x = 10 +self.size/2
+    self.canvasHeight = canvas.height;
+    self.canvasWidth = canvas.width;
+    self.score = 0;
+    self.size = 50;
+   
+    self.side = side;
+    if(self.side ==='left'){
+        self.x=10
+    }
+    else if(self.side === 'right'){
+        self.x= self.canvasWidth -10
+    }
     self.y = canvas.height/2
     self.direction = 0;
     
-    self.speed = 5;
+    self.speed = 2;
     self.ctx = canvas.getContext('2d');   
 }
 
@@ -41,5 +45,5 @@ Player.prototype.draw =function(){
     var self = this;
     
     self.ctx.fillStyle ='black';
-    self.ctx.fillRect(25,100,25,100);
+    self.ctx.fillRect(self.x-self.size/2, self.y-self.size/2, self.size, self.size);
 };
