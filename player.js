@@ -40,7 +40,17 @@ Player.prototype.update = function(){
         self.direction =-1;
     }
 };
+//Player.prototype.collidesWithBall = function(ball){
+   // var self = this;
+    //var result = false;
 
+    //return result;
+//}
+//Player.prototype.collided =function(){
+    //var self = this;
+    //return - ball.self.direction;
+
+//}
 Player.prototype.draw =function(){
     var self = this;
     
