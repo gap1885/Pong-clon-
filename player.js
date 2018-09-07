@@ -6,8 +6,9 @@ function Player(canvas, side){
     self.canvasHeight = canvas.height;
     self.canvasWidth = canvas.width;
     self.score = 0;
-    self.size = 50;
-   
+    self.width = 30;
+    self.height = 100;
+    
     self.side = side;
     if(self.side ==='left'){
         self.x=10
@@ -26,7 +27,52 @@ Player.prototype.setDirection = function(direction){
     var self = this;
     self.direction = direction;
 };
+Player.prototype.collides= function(ball){
+    var self = this;
+    var result = false;
 
+    return result;
+}
+Player.prototype.collidesWithBall = function(){
+    var e = {
+        x:self.width,
+        y:0
+    };
+    var f= {
+        x:self.width,
+        y:self.height/2
+    };
+    var g = {
+        x:self.width,
+        y:self.height
+    };
+    var h= {
+        x:0,
+        y:0
+    };
+    var i  = {
+        x:0,
+        y:self.height/2
+    };
+    var j = {
+        x:0,
+        y:self.height
+    };
+    var e = {
+        x:self.width,
+        y:0
+    };
+    
+    
+     if (self.ball.x <self.player.x && self.ball.y === center){
+         return self.ball.direction.x
+     } else if (self.ball.x <self.player.x && self.ball.y <= zoneUp){
+         return self.ball.direction.x*-1 &&self.ball.direction.y+-1
+     }else if (self.ball.x <=self.player.x && self.ball.y <= zoneDown){
+         return self.ball.direction.x*-1 &&self.ball.direction.y
+     //return result;
+ }
+ };
 Player.prototype.update = function(){
     var self = this;
     
@@ -40,20 +86,10 @@ Player.prototype.update = function(){
         self.direction =-1;
     }
 };
-//Player.prototype.collidesWithBall = function(ball){
-   // var self = this;
-    //var result = false;
 
-    //return result;
-//}
-//Player.prototype.collided =function(){
-    //var self = this;
-    //return - ball.self.direction;
-
-//}
 Player.prototype.draw =function(){
     var self = this;
     
     self.ctx.fillStyle ='black';
-    self.ctx.fillRect(self.x-self.size/2, self.y-self.size/2, self.size, self.size);
+    self.ctx.fillRect(self.x-self.width/2, self.y-self.height/2, self.width, self.height);
 };
